@@ -12,10 +12,15 @@ class NavigationBarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(theme: ThemeData(
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(
+          fontFamily: 'Kurale',
+        )
+      ),
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
-        seedColor: const Color(0x293936),
-        background: const Color(0x293936),
+        seedColor: const Color(0x00E6DCCE),
+        background: const Color(0x00E6DCCE),
           ),
       ),
       debugShowCheckedModeBanner: false,
@@ -34,31 +39,33 @@ class NavigationExample extends StatefulWidget {
 
 class _NavigationExampleState extends State<NavigationExample> {
   int currentPageIndex = 0;
+  String title = '';
+  
 
   @override
   Widget build(BuildContext context) {
-    // final ThemeData theme = Theme.of(context);
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.account_circle),
-            icon: Icon(Icons.account_circle_outlined),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF293936),
+        title: Center(child: Text(title,)),
+        ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: currentPageIndex,
+        //selectedItemColor: Theme.of(context).primaryColor,
+          backgroundColor: const Color(0xFF293936),
+        //type: BottomNavigationBarType.fixed,
+        
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.storage),
             label: 'Профиль',
           ),
-          NavigationDestination(
-            selectedIcon: Badge(child: Icon(Icons.account_balance_wallet)),
-            icon: Badge(child: Icon(Icons.account_balance_wallet_outlined)),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.timer),
             label: 'История',
           ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.add_chart),
+          BottomNavigationBarItem(
             icon: Icon(Icons.add_chart_outlined),
             label: 'Графики',
           ),
@@ -79,4 +86,18 @@ class _NavigationExampleState extends State<NavigationExample> {
       ][currentPageIndex],
     );
   }
+
+   void onTabTapped(int index) {
+     setState(() {
+     currentPageIndex = index;
+      switch(index) { 
+       case 0: { title = 'Профиль'; } 
+       break; 
+       case 1: { title = 'История'; } 
+       break;
+       case 2: { title = 'Графики'; } 
+       break;
+      } 
+     });
+   }
 }
