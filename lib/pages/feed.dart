@@ -6,8 +6,16 @@ class Feed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xFF293936),
+    return const Scaffold(
+        backgroundColor:  Color(0xFF293936),
+        body: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              //вот тута все элементы 
+            ]
+          )
+        )
     );
-  }
+  } 
 }
