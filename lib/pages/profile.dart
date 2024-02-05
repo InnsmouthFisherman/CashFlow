@@ -8,49 +8,54 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF293936),
-      body: Stack(
-        children: [
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: 
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              buildInputContainer('Доход в месяц'),
-              buildInputContainer('Средние траты'),
-              buildInputContainer('Город'),
-              buildInputContainer('Возраст'),
-              buildInputContainer('Готовность к риску'),
+              parameter('Доход в месяц'),
+              parameter('Средние траты'),
+              parameter('Город'),
+              parameter('Возраст'),
+              parameter('Готовность к риску'),
+              const SizedBox(height: 20,),
+              SizedBox(
+                width: 340,
+                // поменять на Text чтобы по дефолту нельзя было ниче тут писать
+                child: TextField( 
+                  readOnly: true,
+                  
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 10,
+                  style: const TextStyle(color: Color(0xFF293936)),
+                  decoration: InputDecoration(
+                    hintText: 'Краткая информация про капитал ляляля',
+                    filled: true,
+                    fillColor: Colors.amber[50],
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
-        ],
       ),
     );
   }
 
-  // занести в один контейнер SDELANO
-  Padding buildInputContainer(String hintText) {
+  Padding parameter(String text){
     return Padding(
       padding: const EdgeInsets.all(10),
         child: Column (
             children: [ 
             Align(
               alignment: const FractionalOffset(0.06, 0.0),
-              child: Text(hintText)
+              child: Text(text)
             ),
-            SizedBox(
-              width: 340.0,
-              child: TextField( 
-              style: const TextStyle(color: Color(0xFF293936)),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.amber[50],
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-          )
-        ]
-      )
+            ]
+        )
     );
   }
 }
